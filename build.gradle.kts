@@ -95,7 +95,6 @@ tasks.named<Test>("testNative") {
 tasks.withType<Test> {
     systemProperty("java.util.logging.manager", "org.jboss.logmanager.LogManager")
     tasks.withType<Test> {
-
         jvmArgs = listOf("--enable-preview")
         testLogging {
             events
@@ -117,3 +116,4 @@ tasks.withType<Test> {
     }
 
 }
+
