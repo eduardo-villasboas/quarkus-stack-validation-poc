@@ -39,17 +39,13 @@ dependencies {
     implementation("io.quarkus:quarkus-arc")
     testImplementation("io.quarkus:quarkus-junit5")
     testImplementation("io.rest-assured:rest-assured")
-    testImplementation("org.assertj:assertj-core:3.6.1")
+    testImplementation("org.assertj:assertj-core:3.24.2")
 
 }
 
 group = "com.quarkus-app-server"
 version = "1.0.0-SNAPSHOT"
 
-java {
-    sourceCompatibility = JavaVersion.VERSION_17
-    targetCompatibility = JavaVersion.VERSION_17
-}
 
 allOpen {
     annotation("javax.ws.rs.Path")
@@ -66,6 +62,10 @@ quarkus {
 tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
     kotlinOptions.jvmTarget = JavaVersion.VERSION_17.toString()
     kotlinOptions.javaParameters = true
+}
+
+tasks.withType<io.quarkus.gradle.tasks.QuarkusDev> {
+    jvmArgs = listOf("--enable-preview")
 }
 
 val componentTest = tasks.create("componentTest", Test::class) {
@@ -117,3 +117,7 @@ tasks.withType<Test> {
 
 }
 
+kotlin {
+    kotlinDaemonJvmArgs = listOf("--enable-preview")
+    jvmToolchain(17)
+}
